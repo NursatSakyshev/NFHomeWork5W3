@@ -54,19 +54,8 @@ class ViewController: UIViewController {
         motivationLabel.font = UIFont.systemFont(ofSize: 16)
         motivationLabel.textAlignment = .center
         
-        let playImage = UIImage(systemName: "play", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))
-        playButton.setImage(playImage, for: .normal)
-        playButton.tintColor = .white
-        playButton.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
-        playButton.layer.cornerRadius = 28
-        playButton.clipsToBounds = true
-        
-        let stopImage = UIImage(systemName: "stop.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))
-        stopButton.setImage(stopImage, for: .normal)
-        stopButton.tintColor = .white
-        stopButton.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
-        stopButton.layer.cornerRadius = 28
-        stopButton.clipsToBounds = true
+        playStopButtonConfiguration(playButton, imageName: "play", pointSize: 25)
+        playStopButtonConfiguration(stopButton, imageName: "stop.fill", pointSize: 20)
         
         stackView.addArrangedSubview(playButton)
         stackView.addArrangedSubview(stopButton)
@@ -105,6 +94,15 @@ class ViewController: UIViewController {
             stackView.topAnchor.constraint(equalTo: circleView.bottomAnchor, constant: 60)
         ])
     }
+    
+    func playStopButtonConfiguration(_ sender: UIButton, imageName: String, pointSize: CGFloat) {
+        let image = UIImage(systemName: imageName, withConfiguration: UIImage.SymbolConfiguration(pointSize: pointSize, weight: .bold))
+        sender.setImage(image, for: .normal)
+        sender.tintColor = .white
+        sender.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
+        sender.layer.cornerRadius = 28
+        sender.clipsToBounds = true
+    }
 }
 
 class CircleStrokeView: UIView {
@@ -112,25 +110,25 @@ class CircleStrokeView: UIView {
         super.init(frame: frame)
         backgroundColor = .clear
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         backgroundColor = .clear
     }
-
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-
+        
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let radius = rect.height / 2 - 5
-
+        
         let path = UIBezierPath()
         path.addArc(withCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
-
+        
         UIColor(red: 1, green: 1, blue: 1, alpha: 0.3).setStroke()
         path.lineWidth = 6.0
         path.lineCapStyle = .round
-
+        
         path.stroke()
     }
 }
@@ -158,5 +156,5 @@ extension Date {
         let stringFormat = formatter.string(from: self)
         return stringFormat
     }
-
+    
 }
