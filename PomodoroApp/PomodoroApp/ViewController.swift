@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     let motivationLabel = UILabel()
     let timeLabel = UILabel()
     let circleView = CircleStrokeView(frame: CGRect(x: 0, y: 0, width: 248, height: 248))
+    let circleProgressView = CircleProgressView(frame: CGRect(x: 0, y: 0, width: 248, height: 248))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +26,15 @@ class ViewController: UIViewController {
     }
     
     func setupUI() {
-        [button, playButton, stopButton, stackView, motivationLabel, timeLabel, circleView].forEach {
+        [button, playButton, stopButton, stackView, motivationLabel, timeLabel, circleView, circleProgressView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        circleProgressView.setProgress(0.5)
         
         view.addSubview(image)
         view.addSubview(button)
         view.addSubview(circleView)
+        view.addSubview(circleProgressView)
         view.addSubview(timeLabel)
         view.addSubview(motivationLabel)
         view.addSubview(stackView)
@@ -74,6 +77,11 @@ class ViewController: UIViewController {
             circleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             circleView.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 52),
             
+            circleProgressView.widthAnchor.constraint(equalToConstant: 248),
+            circleProgressView.heightAnchor.constraint(equalToConstant: 248),
+            circleProgressView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            circleProgressView.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 52),
+            
             timeLabel.centerXAnchor.constraint(equalTo: circleView.centerXAnchor),
             timeLabel.topAnchor.constraint(equalTo: circleView.topAnchor, constant: 75),
             timeLabel.widthAnchor.constraint(equalToConstant: 200),
@@ -110,26 +118,61 @@ class CircleStrokeView: UIView {
         super.init(frame: frame)
         backgroundColor = .clear
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         backgroundColor = .clear
     }
-    
+
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
+
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let radius = rect.height / 2 - 5
-        
+
         let path = UIBezierPath()
         path.addArc(withCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
-        
+
         UIColor(red: 1, green: 1, blue: 1, alpha: 0.3).setStroke()
         path.lineWidth = 6.0
         path.lineCapStyle = .round
-        
+
         path.stroke()
+    }
+}
+
+class CircleProgressView: UIView {
+    private var progressLayer: CAShapeLayer!
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupProgressLayer()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupProgressLayer()
+    }
+
+    private func setupProgressLayer() {
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        let radius = min(bounds.width, bounds.height) / 2.0 - 5
+        let startAngle = -CGFloat.pi / 2.0
+        let endAngle = startAngle + (2.0 * CGFloat.pi)
+        let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+
+        progressLayer = CAShapeLayer()
+        progressLayer.path = circularPath.cgPath
+        progressLayer.strokeColor = UIColor.white.cgColor
+        progressLayer.lineWidth = 6.0
+        progressLayer.fillColor = UIColor.clear.cgColor
+        progressLayer.strokeEnd = 0.0  // Initial progress
+
+        layer.addSublayer(progressLayer)
+    }
+
+    func setProgress(_ progress: CGFloat) {
+        progressLayer.strokeEnd = progress
     }
 }
 
