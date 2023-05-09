@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
 //        window?.rootViewController = ViewController()
-//        window?.rootViewController = TableViewController()
-        window?.rootViewController = TestViewController()
+        window?.rootViewController = TableViewController()
+//        window?.rootViewController = TestViewController()
         
         return true
     }
