@@ -11,13 +11,14 @@ class ViewController: UIViewController {
     
     let image = UIImageView(image: UIImage(named: "BG"))
     let date = Date()
+    var isPlaying = true
     let button = UIButton()
     let playButton = UIButton()
     let stopButton = UIButton()
     let stackView = UIStackView()
     let motivationLabel = UILabel()
     let timeLabel = UILabel()
-    let circleView = CircleStrokeView(frame: CGRect(x: 0, y: 0, width: 248, height: 248))
+    let circleView = CircleProgressView(frame: CGRect(x: 0, y: 0, width: 248, height: 248))
     let circleProgressView = CircleProgressView(frame: CGRect(x: 0, y: 0, width: 248, height: 248))
     
     override func viewDidLoad() {
@@ -29,6 +30,7 @@ class ViewController: UIViewController {
         [button, playButton, stopButton, stackView, motivationLabel, timeLabel, circleView, circleProgressView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        circleView.setProgress(1)
         circleProgressView.setProgress(0.5)
         
         view.addSubview(image)
@@ -57,7 +59,9 @@ class ViewController: UIViewController {
         motivationLabel.font = UIFont.systemFont(ofSize: 16)
         motivationLabel.textAlignment = .center
         
-        playStopButtonConfiguration(playButton, imageName: "play", pointSize: 25)
+        playStopButtonConfiguration(playButton, imageName: "pause", pointSize: 25)
+        playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        
         playStopButtonConfiguration(stopButton, imageName: "stop.fill", pointSize: 20)
         
         stackView.addArrangedSubview(playButton)
@@ -111,33 +115,11 @@ class ViewController: UIViewController {
         sender.layer.cornerRadius = 28
         sender.clipsToBounds = true
     }
-}
-
-class CircleStrokeView: UIView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .clear
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        backgroundColor = .clear
-    }
-
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-
-        let center = CGPoint(x: rect.midX, y: rect.midY)
-        let radius = rect.height / 2 - 5
-
-        let path = UIBezierPath()
-        path.addArc(withCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
-
-        UIColor(red: 1, green: 1, blue: 1, alpha: 0.3).setStroke()
-        path.lineWidth = 6.0
-        path.lineCapStyle = .round
-
-        path.stroke()
+    
+    @objc func playButtonPressed() {
+        isPlaying.toggle()
+        let image = UIImage(systemName: isPlaying ? "pause" : "play", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))
+        playButton.setImage(image, for: .normal)
     }
 }
 
@@ -163,7 +145,7 @@ class CircleProgressView: UIView {
 
         progressLayer = CAShapeLayer()
         progressLayer.path = circularPath.cgPath
-        progressLayer.strokeColor = UIColor.white.cgColor
+//        progressLayer.strokeColor = UIColor.white.cgColor
         progressLayer.lineWidth = 6.0
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.strokeEnd = 0.0  // Initial progress
@@ -173,6 +155,8 @@ class CircleProgressView: UIView {
 
     func setProgress(_ progress: CGFloat) {
         progressLayer.strokeEnd = progress
+        let strokeColor = progress == 1 ? UIColor(red: 1, green: 1, blue: 1, alpha: 0.3) : UIColor.white
+        progressLayer.strokeColor = strokeColor.cgColor
     }
 }
 
@@ -199,5 +183,4 @@ extension Date {
         let stringFormat = formatter.string(from: self)
         return stringFormat
     }
-    
 }
