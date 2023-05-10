@@ -8,27 +8,35 @@
 import UIKit
 
 class Settings {
-    var focusTime: Date = UserDefaults.standard.object(forKey: "FocusTime") as? Date ?? Date() {
-        didSet {
-            UserDefaults.standard.set(self.focusTime, forKey: "FocusTime")
+    var focusTime: Date {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "FocusTime")
+        }
+        get {
+            UserDefaults.standard.object(forKey: "FocusTime") as? Date ?? Date()
         }
     }
     
-    var currentTime: Date = UserDefaults.standard.object(forKey: "FocusTime") as? Date ?? Date() {
-        didSet {
-            UserDefaults.standard.set(self.focusTime, forKey: "FocusTime")
+    var currentTime: Date {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "FocusTime")
+        }
+        get {
+            UserDefaults.standard.object(forKey: "FocusTime") as? Date ?? Date()
         }
     }
     
-    var breakTime: Date = UserDefaults.standard.object(forKey: "BreakTime") as? Date ?? Date() {
-        didSet {
-            UserDefaults.standard.set(self.breakTime, forKey: "BreakTime")
+    var breakTime: Date {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "BreakTime")
+        }
+        get {
+            UserDefaults.standard.object(forKey: "BreakTime") as? Date ?? Date()
         }
     }
 }
 
 class TableViewController: UITableViewController {
-    var selectedDate: Date?
     var settings = Settings()
     
     override func viewDidLoad() {
@@ -64,7 +72,6 @@ class TableViewController: UITableViewController {
 class CustomCell: UITableViewCell {
     let timeMode = UILabel()
     let datePicker = UIDatePicker()
-    var settings = Settings()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -99,4 +106,3 @@ class CustomCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

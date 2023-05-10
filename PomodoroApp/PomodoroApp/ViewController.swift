@@ -29,11 +29,16 @@ class ViewController: UIViewController {
         updateTimer()
     }
     
+    func calculatePercentage(bigDate: Date, smallDate: Date) -> CGFloat {
+        return CGFloat(bigDate.getSeconds() - smallDate.getSeconds()) / CGFloat(bigDate.getSeconds())
+    }
+    
     func updateTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             self.date = self.date.addingTimeInterval(-1)
             self.timeLabel.text = self.date.toString()
+            self.circleProgressView.setProgress(self.calculatePercentage(bigDate: self.settings.focusTime, smallDate: self.date))
         }
     }
        func stopTimer() {
@@ -45,7 +50,7 @@ class ViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         circleView.setProgress(1)
-        circleProgressView.setProgress(0.5)
+        circleProgressView.setProgress(calculatePercentage(bigDate: settings.focusTime, smallDate: date))
         
         view.addSubview(image)
         view.addSubview(button)
@@ -134,6 +139,7 @@ class ViewController: UIViewController {
         isPlaying.toggle()
         let image = UIImage(systemName: isPlaying ? "pause" : "play", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))
         playButton.setImage(image, for: .normal)
+        isPlaying ? updateTimer() : stopTimer()
     }
 }
 
@@ -196,5 +202,16 @@ extension Date {
         formatter.dateFormat = hour == 0 ? "mm:ss" : "HH:mm:ss"
         let stringFormat = formatter.string(from: self)
         return stringFormat
+    }
+}
+
+
+extension Int {
+    func toDate() -> String {
+        let hours = self / 3600
+        let minutes = self / 60
+        let seconds = self % 60
+        return hours == 0 ? String(format: "%02d:%02d", minutes, seconds) :
+        String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }

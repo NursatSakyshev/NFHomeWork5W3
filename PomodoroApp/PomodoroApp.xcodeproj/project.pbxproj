@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C85D2D132A0A62EA00F358DD /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85D2D122A0A62EA00F358DD /* HistoryTableViewController.swift */; };
+		C8B7CBF52A0BDD2100210720 /* HIstoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7CBF42A0BDD2100210720 /* HIstoryViewController.swift */; };
 		C8C1919A2A07BC87009ACD03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C191992A07BC87009ACD03 /* AppDelegate.swift */; };
 		C8C1919E2A07BC87009ACD03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C1919D2A07BC87009ACD03 /* ViewController.swift */; };
 		C8C191A32A07BC88009ACD03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8C191A22A07BC88009ACD03 /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C85D2D122A0A62EA00F358DD /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		C8B7CBF42A0BDD2100210720 /* HIstoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIstoryViewController.swift; sourceTree = "<group>"; };
 		C8C191962A07BC87009ACD03 /* PomodoroApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8C191992A07BC87009ACD03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8C1919D2A07BC87009ACD03 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 				C8C191A72A07BC88009ACD03 /* Info.plist */,
 				C8C191AD2A07F763009ACD03 /* TableViewController.swift */,
 				C8F5C0112A08BF3A003E4994 /* TestViewController.swift */,
+				C85D2D122A0A62EA00F358DD /* HistoryTableViewController.swift */,
+				C8B7CBF42A0BDD2100210720 /* HIstoryViewController.swift */,
 			);
 			path = PomodoroApp;
 			sourceTree = "<group>";
@@ -141,6 +147,8 @@
 				C8C191AE2A07F763009ACD03 /* TableViewController.swift in Sources */,
 				C8F5C0122A08BF3A003E4994 /* TestViewController.swift in Sources */,
 				C8C1919A2A07BC87009ACD03 /* AppDelegate.swift in Sources */,
+				C85D2D132A0A62EA00F358DD /* HistoryTableViewController.swift in Sources */,
+				C8B7CBF52A0BDD2100210720 /* HIstoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
