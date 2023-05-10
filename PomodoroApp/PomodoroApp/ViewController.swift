@@ -10,9 +10,11 @@ import UIKit
 class ViewController: UIViewController {
     
     let image = UIImageView(image: UIImage(named: "BG"))
-    let date = Date()
+    let settings = Settings()
+    lazy var date: Date = settings.focusTime
     var isPlaying = true
     let button = UIButton()
+    var timer: Timer?
     let playButton = UIButton()
     let stopButton = UIButton()
     let stackView = UIStackView()
@@ -24,7 +26,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        updateTimer()
     }
+    
+    func updateTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            self.date = self.date.addingTimeInterval(-1)
+            self.timeLabel.text = self.date.toString()
+        }
+    }
+       func stopTimer() {
+           timer?.invalidate()
+       }
     
     func setupUI() {
         [button, playButton, stopButton, stackView, motivationLabel, timeLabel, circleView, circleProgressView].forEach {

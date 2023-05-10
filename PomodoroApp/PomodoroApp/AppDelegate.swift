@@ -16,9 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow()
         window?.makeKeyAndVisible()
-//        window?.rootViewController = ViewController()
-        window?.rootViewController = TableViewController()
+        window?.rootViewController = ViewController()
+//        window?.rootViewController = TableViewController()
 //        window?.rootViewController = TestViewController()
+//        window?.rootViewController = HistoryTableViewController()
+//        window?.rootViewController = HIstoryViewController()
         
         return true
     }
