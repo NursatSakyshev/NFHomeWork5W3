@@ -26,7 +26,7 @@ final class TabBarController: UITabBarController {
     
     private func configure() {
         tabBar.tintColor = Resources.Colors.active
-        tabBar.barTintColor = Resources.Colors.inActive
+//        tabBar.barTintColor = Resources.Colors.inActive
         tabBar.layer.masksToBounds = true
         
         let mainController = ViewController()

@@ -7,22 +7,38 @@
 
 import UIKit
 
+func defaultTime(_ mode: mode) -> Date {
+    let calendar = Calendar.current
+    var dateComponents = DateComponents()
+    switch mode {
+    case .Focus:
+        dateComponents.minute = 25
+        
+    case .Break:
+        dateComponents.minute = 5
+    }
+    
+    guard let specificDate = calendar.date(from: dateComponents) else { return Date() }
+    return specificDate
+}
+
 class Settings {
+    
     var focusTime: Date {
         set {
             UserDefaults.standard.set(newValue, forKey: "FocusTime")
         }
         get {
-            UserDefaults.standard.object(forKey: "FocusTime") as? Date ?? Date()
+            UserDefaults.standard.object(forKey: "FocusTime") as? Date ?? defaultTime(.Focus)
         }
     }
     
     var currentTime: Date {
         set {
-            UserDefaults.standard.set(newValue, forKey: "FocusTime")
+            UserDefaults.standard.set(self.focusTime, forKey: "FocusTime")
         }
         get {
-            UserDefaults.standard.object(forKey: "FocusTime") as? Date ?? Date()
+            UserDefaults.standard.object(forKey: "FocusTime") as? Date ?? defaultTime(.Focus)
         }
     }
     
@@ -31,7 +47,7 @@ class Settings {
             UserDefaults.standard.set(newValue, forKey: "BreakTime")
         }
         get {
-            UserDefaults.standard.object(forKey: "BreakTime") as? Date ?? Date()
+            UserDefaults.standard.object(forKey: "BreakTime") as? Date ?? defaultTime(.Break)
         }
     }
 }
@@ -44,6 +60,8 @@ class TableViewController: UITableViewController {
         tableView.register(CustomCell.self, forCellReuseIdentifier: "cell")
         tableView.backgroundColor =  UIColor(red: 28/255, green: 28/255, blue: 30/255, alpha: 1)
         tableView.rowHeight = 54
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.title = "Settings"
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 2 }
