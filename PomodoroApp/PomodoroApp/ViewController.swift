@@ -36,8 +36,26 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        date = settings.focusTime
+        isPlaying = false
+        updateUI()
+    }
+    
+    func updateUI() {
+        switch timerMode {
+        case .Focus:
+            date = settings.focusTime
+        case .Break:
+            date = settings.breakTime
+        }
+        isPlaying ? updateTimer() : stopTimer()
+        let image = UIImage(systemName: isPlaying ? "pause" : "play", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))
+        playButton.setImage(image, for: .normal)
         timeLabel.text = date.toString()
+        self.circleProgressView.setProgress(self.calculatePercentage(bigDate: self.timerMode == .Focus ? self.settings.focusTime : self.settings.breakTime, smallDate: self.date))
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        stopTimer()
     }
     
     init() {
@@ -183,6 +201,8 @@ class ViewController: UIViewController {
         sender.clipsToBounds = true
     }
     
+    //MARK: PLAY BUTTON FUNCTION
+    
     @objc func playButtonPressed() {
         isPlaying.toggle()
         let image = UIImage(systemName: isPlaying ? "pause" : "play", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))
@@ -201,8 +221,10 @@ class ViewController: UIViewController {
             historyToday["Break time"]! += settings.breakTime.getSeconds() - date.getSeconds()
             date = settings.breakTime
         }
+        
         UserDefaults.standard.setValue(historyToday, forKey: today)
-//        isPlaying = false
+        isPlaying = false
+        updateUI()
     }
     
     
@@ -225,25 +247,29 @@ class CircleProgressView: UIView {
     
     private func setupProgressLayer() {
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let radius = min(bounds.width, bounds.height) / 2.0 - 5
+        let radius = min(bounds.width, bounds.height) / 2.0
         let startAngle = -CGFloat.pi / 2.0
         let endAngle = startAngle + (2.0 * CGFloat.pi)
         let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         
         progressLayer = CAShapeLayer()
         progressLayer.path = circularPath.cgPath
-        //        progressLayer.strokeColor = UIColor.white.cgColor
         progressLayer.lineWidth = 6.0
         progressLayer.fillColor = UIColor.clear.cgColor
-        progressLayer.strokeEnd = 0.0  // Initial progress
+        progressLayer.strokeEnd = 0.0
         
         layer.addSublayer(progressLayer)
     }
     
     func setProgress(_ progress: CGFloat) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        
         progressLayer.strokeEnd = progress
         let strokeColor = progress == 1 ? UIColor(red: 1, green: 1, blue: 1, alpha: 0.3) : UIColor.white
         progressLayer.strokeColor = strokeColor.cgColor
+        
+        CATransaction.commit()
     }
 }
 
@@ -275,8 +301,9 @@ extension Date {
 
 // MARK: EXTENSION INT
 extension Int {
-    func toDate() -> String {
+    mutating func toDate() -> String {
         let hours = self / 3600
+        self %= 3600
         let minutes = self / 60
         let seconds = self % 60
         return hours == 0 ? String(format: "%02d:%02d", minutes, seconds) :
