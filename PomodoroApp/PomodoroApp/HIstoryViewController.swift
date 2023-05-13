@@ -40,7 +40,6 @@ class HIstoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.reloadData()
     }
     
-    let label = UILabel()
     let tableView = UITableView()
 
     override func viewDidLoad() {
@@ -50,28 +49,24 @@ class HIstoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func setupUI() {
         view.backgroundColor = UIColor(red: 28/255, green: 28/255, blue: 30/255, alpha: 1)
-        label.text = "History"
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        label.textColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.title = "History"
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = view.backgroundColor
         tableView.register(HistoryCell.self, forCellReuseIdentifier: "cell")
 
         
-        [tableView, label].forEach {
+        [tableView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: label.bottomAnchor,constant: 26),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor,constant: 104),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 56),
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     

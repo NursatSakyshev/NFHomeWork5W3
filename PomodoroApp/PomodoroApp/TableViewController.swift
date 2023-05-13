@@ -70,7 +70,7 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
         cell.timeMode.text = indexPath.row == 0 ? "Focus time" : "Break time"
         cell.datePicker.date = indexPath.row == 0 ? settings.focusTime : settings.breakTime
-        cell.backgroundColor = UIColor(red: 28/255, green: 28/255, blue: 30/255, alpha: 1)
+        cell.backgroundColor = tableView.backgroundColor
         cell.datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
         cell.datePicker.tag = indexPath.row
         cell.selectionStyle = .none
@@ -97,8 +97,6 @@ class CustomCell: UITableViewCell {
         datePicker.datePickerMode = .time
         datePicker.locale = Locale(identifier: "ru_RU")
         datePicker.isUserInteractionEnabled = true
-//        datePicker.date = settings.focusTime
-//        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         
         [timeMode, datePicker].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -115,10 +113,6 @@ class CustomCell: UITableViewCell {
             datePicker.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16)
         ])
     }
-    
-//    @objc func datePickerValueChanged(_ datePicker: UIDatePicker) {
-//        settings.focusTime = datePicker.date
-//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -37,16 +37,16 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         isPlaying = false
-        updateUI()
-    }
-    
-    func updateUI() {
         switch timerMode {
         case .Focus:
             date = settings.focusTime
         case .Break:
             date = settings.breakTime
         }
+        updateUI()
+    }
+    
+    func updateUI() {
         isPlaying ? updateTimer() : stopTimer()
         let image = UIImage(systemName: isPlaying ? "pause" : "play", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))
         playButton.setImage(image, for: .normal)
@@ -115,7 +115,6 @@ class ViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         circleView.setProgress(1)
-        circleProgressView.setProgress(calculatePercentage(bigDate: settings.focusTime, smallDate: date))
         
         view.addSubview(image)
         view.addSubview(button)
@@ -205,9 +204,7 @@ class ViewController: UIViewController {
     
     @objc func playButtonPressed() {
         isPlaying.toggle()
-        let image = UIImage(systemName: isPlaying ? "pause" : "play", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))
-        playButton.setImage(image, for: .normal)
-        isPlaying ? updateTimer() : stopTimer()
+        updateUI()
     }
     
     @objc func stopButtonPressed() {
