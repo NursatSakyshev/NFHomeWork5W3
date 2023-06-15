@@ -11,7 +11,7 @@ enum Resources {
     enum Colors {
         static var active = UIColor.white
         static var inActive = UIColor.white
-        static var separator = UIColor.red 
+        static var separator = UIColor.clear
     }
     
     enum Strings {
