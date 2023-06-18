@@ -90,6 +90,7 @@ class HIstoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         return footerView
     }
 }
+
 class HistoryCell: UITableViewCell {
     let timeMode = UILabel()
     let time = UILabel()
