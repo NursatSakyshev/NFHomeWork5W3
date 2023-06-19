@@ -17,7 +17,7 @@ var date = ["12.11.12", "21.23.34", "12.12.12"]
         tableView.register(HistoryCell.self, forCellReuseIdentifier: "historyCell")
         tableView.backgroundColor =  UIColor(red: 28/255, green: 28/255, blue: 30/255, alpha: 1)
         tableView.rowHeight = 54
-        label.text = "History"
+        self.navigationItem.title = "History"
         label.textColor = .white
         view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
