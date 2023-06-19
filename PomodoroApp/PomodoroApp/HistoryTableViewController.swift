@@ -17,7 +17,7 @@ var date = ["12.11.12", "21.23.34", "12.12.12"]
         tableView.register(HistoryCell.self, forCellReuseIdentifier: "historyCell")
         tableView.backgroundColor =  UIColor(red: 28/255, green: 28/255, blue: 30/255, alpha: 1)
         tableView.rowHeight = 54
-        label.text = "History"
+        self.navigationItem.title = "History"
         label.textColor = .white
         view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -66,34 +66,3 @@ var date = ["12.11.12", "21.23.34", "12.12.12"]
     }
 }
 
-//class HistoryCell: UITableViewCell {
-//    let timeMode = UILabel()
-//    let time = UILabel()
-//
-//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        timeMode.textColor = .white
-//        time.textColor = UIColor(red: 235/255, green: 235/255, blue: 245/255, alpha: 0.6)
-//        timeMode.text = "Focus time"
-//        time.text = "hello"
-//
-//        [timeMode, time].forEach {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            contentView.addSubview($0)
-//        }
-//
-//        NSLayoutConstraint.activate([
-//            timeMode.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-//            timeMode.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -11),
-//            timeMode.widthAnchor.constraint(equalToConstant: 304),
-//            timeMode.heightAnchor.constraint(equalToConstant: 22),
-//
-//            time.bottomAnchor.constraint(equalTo: timeMode.bottomAnchor),
-//            time.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16)
-//        ])
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//}
