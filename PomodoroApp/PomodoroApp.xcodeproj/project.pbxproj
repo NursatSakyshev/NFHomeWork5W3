@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C85D2D132A0A62EA00F358DD /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85D2D122A0A62EA00F358DD /* HistoryTableViewController.swift */; };
+		C85EA3932BDAAF3300BBCF83 /* HistoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EA3922BDAAF3300BBCF83 /* HistoryViewCell.swift */; };
 		C8B7CBF52A0BDD2100210720 /* HIstoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7CBF42A0BDD2100210720 /* HIstoryViewController.swift */; };
 		C8B7CBF72A0CFB5400210720 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7CBF62A0CFB5400210720 /* TabBarController.swift */; };
 		C8B7CBF92A0CFC1C00210720 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7CBF82A0CFC1C00210720 /* Resources.swift */; };
@@ -16,11 +17,11 @@
 		C8C191A32A07BC88009ACD03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8C191A22A07BC88009ACD03 /* Assets.xcassets */; };
 		C8C191A62A07BC88009ACD03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C191A42A07BC88009ACD03 /* LaunchScreen.storyboard */; };
 		C8C191AE2A07F763009ACD03 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C191AD2A07F763009ACD03 /* TableViewController.swift */; };
-		C8F5C0122A08BF3A003E4994 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F5C0112A08BF3A003E4994 /* TestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C85D2D122A0A62EA00F358DD /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		C85EA3922BDAAF3300BBCF83 /* HistoryViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewCell.swift; sourceTree = "<group>"; };
 		C8B7CBF42A0BDD2100210720 /* HIstoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIstoryViewController.swift; sourceTree = "<group>"; };
 		C8B7CBF62A0CFB5400210720 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C8B7CBF82A0CFC1C00210720 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
@@ -31,7 +32,6 @@
 		C8C191A52A07BC88009ACD03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C8C191A72A07BC88009ACD03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8C191AD2A07F763009ACD03 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		C8F5C0112A08BF3A003E4994 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,11 +70,11 @@
 				C8C191A42A07BC88009ACD03 /* LaunchScreen.storyboard */,
 				C8C191A72A07BC88009ACD03 /* Info.plist */,
 				C8C191AD2A07F763009ACD03 /* TableViewController.swift */,
-				C8F5C0112A08BF3A003E4994 /* TestViewController.swift */,
 				C85D2D122A0A62EA00F358DD /* HistoryTableViewController.swift */,
 				C8B7CBF42A0BDD2100210720 /* HIstoryViewController.swift */,
 				C8B7CBF62A0CFB5400210720 /* TabBarController.swift */,
 				C8B7CBF82A0CFC1C00210720 /* Resources.swift */,
+				C85EA3922BDAAF3300BBCF83 /* HistoryViewCell.swift */,
 			);
 			path = PomodoroApp;
 			sourceTree = "<group>";
@@ -151,10 +151,10 @@
 			files = (
 				C8C1919E2A07BC87009ACD03 /* ViewController.swift in Sources */,
 				C8C191AE2A07F763009ACD03 /* TableViewController.swift in Sources */,
-				C8F5C0122A08BF3A003E4994 /* TestViewController.swift in Sources */,
 				C8C1919A2A07BC87009ACD03 /* AppDelegate.swift in Sources */,
 				C8B7CBF72A0CFB5400210720 /* TabBarController.swift in Sources */,
 				C8B7CBF92A0CFC1C00210720 /* Resources.swift in Sources */,
+				C85EA3932BDAAF3300BBCF83 /* HistoryViewCell.swift in Sources */,
 				C85D2D132A0A62EA00F358DD /* HistoryTableViewController.swift in Sources */,
 				C8B7CBF52A0BDD2100210720 /* HIstoryViewController.swift in Sources */,
 			);
